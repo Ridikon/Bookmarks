@@ -1,0 +1,50 @@
+<li class="list-group-item d-flex justify-content-between align-items-center">
+  {{bookmarkItem.title}}
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary" (click)="editBookmarkModal(template)">Edit</button>
+    <button type="button" class="btn btn-warning">Delete</button>
+  </div>
+</li>
+
+<!-- Modal -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Bookmark title</label>
+        <input type="text"
+               class="form-control"
+               [ngClass]="{'border-danger': form.get('title').invalid && form.get('title').touched}"
+               placeholder="Enter Bookmark title"
+               formControlName="title">
+        <p class="text-danger" *ngIf="form.get('title').invalid && form.get('title').touched">
+          The field should not be empty
+        </p>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Bookmark url</label>
+        <input type="text"
+               class="form-control"
+               [ngClass]="{'border-danger': form.get('url').invalid && form.get('url').touched}"
+               placeholder="Enter Bookmark url"
+               formControlName="url">
+        <p class="text-danger" *ngIf="form.get('url').invalid && form.get('url').touched">
+          <span *ngIf="form.get('url').errors['required']">The field should not be empty. </span>
+          <span *ngIf="form.get('url').errors['errorCode']">Please enter the correct URL</span>
+        </p>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="editBookmark(bookmarkItem)">Save</button>
+  </div>
+</ng-template>
+
+
