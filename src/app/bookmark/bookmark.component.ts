@@ -10,7 +10,7 @@ import {DbService} from '../services/db.service';
   styleUrls: ['./bookmark.component.css']
 })
 export class BookmarkComponent implements OnInit {
-  @Input() bookmarkItem: { title: string, url: string, id: number };
+  @Input() bookmarkItem;
   modalRef: BsModalRef;
   form: FormGroup;
 
@@ -19,19 +19,25 @@ export class BookmarkComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      title: new FormControl(this.bookmarkItem.title, Validators.required),
-      url: new FormControl(this.bookmarkItem.url, [Validators.required, this.checkUrl])
+      title: new FormControl(this.bookmarkItem.data.title, Validators.required),
+      url: new FormControl(this.bookmarkItem.data.url, [Validators.required, this.checkUrl])
     });
   }
 
-  editBookmarkModal(template: TemplateRef<any>) {
+  bookmarkModal(template: TemplateRef<any>) {
     console.log(template);
     this.modalRef = this.modalService.show(template);
   }
 
   editBookmark(item) {
-    this.db.updateItem('bookmarks', String(item.id),  this.form.value);
+    this.db.updateItem('bookmarks', item.key,  this.form.value);
+    this.modalRef.hide();
   }
+
+    deleteBookmark(item) {
+        this.db.deleteItem('bookmarks', item.key);
+        this.modalRef.hide();
+    }
 
   checkUrl(control: FormControl) {
     const regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;

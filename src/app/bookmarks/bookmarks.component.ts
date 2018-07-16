@@ -4,6 +4,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DbService} from '../services/db.service';
 
+
 @Component({
   selector: 'app-bookmarks',
   templateUrl: './bookmarks.component.html',
@@ -19,15 +20,21 @@ export class BookmarksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.getItems('/bookmarks').snapshotChanges().subscribe(res => {
-      console.log('res', res);
+    this.db.getItems('/bookmarks').subscribe(res => {
+        this.bookmarks = res;
+        // this.bookmarks.map(item => {
+        //     item.id = res.key;
+        // });
+        let copy = JSON.stringify(this.bookmarks);
+        this.bookmarksCopy = JSON.parse(copy);
+        console.log(res);
     });
-    this.db.getItems('/bookmarks').valueChanges().subscribe(res => {
-      this.bookmarks = res;
-      console.log('this.bookmarks', this.bookmarks);
-      let copy = JSON.stringify(this.bookmarks);
-      this.bookmarksCopy = JSON.parse(copy);
-    });
+    // this.db.getItems('/bookmarks').valueChanges().subscribe(res => {
+    //   this.bookmarks = res;
+    //   console.log('this.bookmarks', this.bookmarks);
+    //   let copy = JSON.stringify(this.bookmarks);
+    //   this.bookmarksCopy = JSON.parse(copy);
+    // });
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
       url: new FormControl('', [Validators.required, this.checkUrl])
@@ -59,13 +66,12 @@ export class BookmarksComponent implements OnInit {
   }
 
   searchResult(search) {
-    console.log(search);
     this.bookmarks = this.bookmarksCopy;
     if (!search) {
       return this.bookmarks;
     }
     this.bookmarks = this.bookmarks.filter(item => {
-      if (String(item.title.toLowerCase()).includes(String(search.toLowerCase()))) {
+      if (String(item.data.title.toLowerCase()).includes(String(search.toLowerCase()))) {
         return item;
       }
     });
