@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ export class DbService {
     }
 
     getItems(path: string) {
-        return this.db.list(path).snapshotChanges()
+        const bookmarkList = this.db.list(path).snapshotChanges()
             .pipe(map(items => {
                 return items.map(a => {
                     const data = a.payload.val();
@@ -19,7 +19,7 @@ export class DbService {
                     return {key, data};
                 });
             }));
-
+        return bookmarkList;
     }
 
     createItem(path: string, data: any) {

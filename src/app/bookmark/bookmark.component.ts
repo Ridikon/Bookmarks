@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DbService} from '../services/db.service';

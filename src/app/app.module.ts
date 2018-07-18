@@ -6,27 +6,33 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {ModalModule} from 'ngx-bootstrap';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {BookmarkComponent} from './bookmark/bookmark.component';
 import {BookmarksComponent} from './bookmarks/bookmarks.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {environment} from '../environments/environment';
+import {SettingsComponent} from './settings/settings.component';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    BookmarkComponent,
-    BookmarksComponent
-  ],
-  imports: [
-    BrowserModule,
-    ModalModule.forRoot(),
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        BookmarkComponent,
+        BookmarksComponent,
+        SettingsComponent
+    ],
+    imports: [
+        BrowserModule,
+        ModalModule.forRoot(),
+        PaginationModule.forRoot(),
+        ReactiveFormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
+        AppRoutingModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

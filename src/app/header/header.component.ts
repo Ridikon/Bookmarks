@@ -22,5 +22,4 @@ export class HeaderComponent implements OnInit {
   searchRun() {
     this.search.emit(this.form.value.search);
   }
-
 }

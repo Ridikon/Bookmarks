@@ -1,0 +1,11 @@
+.settings {
+    height: 100%;
+}
+
+.settings__content {
+    height: calc(100% - 40px);
+}
+
+.settings__header {
+    border-bottom: 1px solid black;
+}
