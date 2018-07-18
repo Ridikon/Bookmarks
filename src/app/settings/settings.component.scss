@@ -1,0 +1,68 @@
+.settings__header {
+  border: 1px solid black;
+
+  .settings__header-logo {
+    border-right: 1px solid black;
+
+    @media (max-width: 768px) {
+      border: none;
+    }
+  }
+}
+
+.settings {
+  height: 100%;
+
+  &__content {
+    height: calc(100% - 40px);
+    border: 1px solid black;
+  }
+
+  &__sidebar {
+    border-right: 1px solid black;
+
+    @media (max-width: 768px) {
+      border-right: none;
+      border-bottom: 1px solid black;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__main {
+    & > section {
+      padding: 20px;
+    }
+
+    .people {
+      &__list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &__item {
+        display: flex;
+      }
+
+      &__logo {
+        img {
+          height: auto;
+          width: 70px;
+        }
+      }
+
+      &__manage {
+        margin: 10px;
+        padding-top: 10px;
+        display: block;
+      }
+    }
+  }
+}
+
+.list-title {
+  margin: 1rem 0 0;
+}

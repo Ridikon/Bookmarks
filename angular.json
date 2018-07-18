@@ -124,5 +124,10 @@
       }
     }
   },
-  "defaultProject": "ProjektX"
+  "defaultProject": "ProjektX",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
