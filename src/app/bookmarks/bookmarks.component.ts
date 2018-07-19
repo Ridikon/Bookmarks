@@ -17,16 +17,14 @@ export class BookmarksComponent implements OnInit {
     bookmarksCopy: any;
     bookmarks = [];
     returnedArray: any[];
+    formData: any;
+    formDataValid: boolean = false;
 
     constructor(private modalService: BsModalService, private db: DbService) {
     }
 
     ngOnInit() {
         this.getBookmarks();
-        this.form = new FormGroup({
-            title: new FormControl('', Validators.required),
-            url: new FormControl('', [Validators.required, this.checkUrl])
-        });
     }
 
     getBookmarks() {
@@ -44,24 +42,14 @@ export class BookmarksComponent implements OnInit {
         this.returnedArray = this.bookmarks.slice(startItem, endItem);
     }
 
-    checkUrl(control: FormControl) {
-        const regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-        if (regex.test(control.value)) {
-            return null;
-        }
-        return {
-            'errorCode': true
-        };
-    }
-
     addBookmarkModal(template: TemplateRef<any>) {
         this.modalRef = this.modalService.show(template);
     }
 
     addBookmark() {
         const bookmark = {
-            title: this.form.value.title,
-            url: this.form.value.url,
+            title: this.formData.value.title,
+            url: this.formData.value.url,
         };
         this.db.createItem('/bookmarks', bookmark);
         this.modalRef.hide();
@@ -78,5 +66,10 @@ export class BookmarksComponent implements OnInit {
                 return item;
             }
         });
+    }
+
+    formComplete(data) {
+        this.formData = data;
+        this.formDataValid = data.valid;
     }
 }

@@ -3,3 +3,8 @@
 .has-margin-10 {
   margin: 10px;
 }
+
+.flex-vertical-aline {
+    display: flex;
+    align-items: center;
+}

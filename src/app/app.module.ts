@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {environment} from '../environments/environment';
 import {SettingsComponent} from './settings/settings.component';
 import {AppRoutingModule} from "./app-routing.module";
+import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import {AppRoutingModule} from "./app-routing.module";
         HeaderComponent,
         BookmarkComponent,
         BookmarksComponent,
-        SettingsComponent
+        SettingsComponent,
+        AddBookmarkComponent
     ],
     imports: [
         BrowserModule,

@@ -1,62 +1,45 @@
 <app-header (search)="searchResult($event)"></app-header>
 <div class="container" *ngIf="!isLoading && bookmarks">
-  <div class="row">
-    <div class="col-md-12">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/settings">Settings</a>
-            </li>
-        </ul>
-      <ul class="list-group">
-          <br>
-        <p>Bookmark List</p>
-        <app-bookmark *ngFor="let bookmark of returnedArray; let i = index" [bookmarkItem]="bookmark"></app-bookmark>
-      </ul>
-        <br>
-      <a href="#" (click)="addBookmarkModal(template)">Create Bookmark</a>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/settings">Settings</a>
+                </li>
+            </ul>
+            <ul class="list-group">
+                <br>
+                <p>Bookmark List</p>
+                <app-bookmark *ngFor="let bookmark of returnedArray; let i = index"
+                              [bookmarkItem]="bookmark"></app-bookmark>
+            </ul>
+            <br>
+            <a href="#" (click)="addBookmarkModal(template)">Create Bookmark</a>
+        </div>
     </div>
-  </div>
     <hr>
-  <div class="row">
-      <div class="col-md-12">
-          <pagination [totalItems]="bookmarks.length"
-                      [boundaryLinks]="true"
-                      firstText="&laquo;" lastText="&raquo;"
-                      (pageChanged)="pageChanged($event)"></pagination>
-      </div>
-  </div>
+    <div class="row">
+        <div class="col-md-12">
+            <pagination [totalItems]="bookmarks.length"
+                        [boundaryLinks]="true"
+                        firstText="&laquo;" lastText="&raquo;"
+                        (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
 </div>
 
 <ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Add</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="form">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Bookmark title</label>
-        <input type="text"
-               [ngClass]="{'border-danger': form.get('title').invalid && form.get('title').touched}"
-               class="form-control" aria-describedby="emailHelp" placeholder="Enter Bookmark title" formControlName="title">
-        <p class="text-danger" *ngIf="form.get('title').invalid && form.get('title').touched">The field should not be empty</p>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Bookmark url</label>
-        <input type="text"
-               [ngClass]="{'border-danger': form.get('url').invalid && form.get('url').touched}"
-               class="form-control" placeholder="Enter Bookmark url" formControlName="url">
-        <p class="text-danger" *ngIf="form.get('url').invalid && form.get('url').touched">
-          <span  *ngIf="form.get('url').errors['required']">The field should not be empty. </span>
-          <span *ngIf="form.get('url').errors['errorCode']">Please enter the correct URL</span>
-        </p>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
-    <button type="submit" class="btn btn-primary" (click)="addBookmark()" [disabled]="!form.valid">Save</button>
-  </div>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-add-bookmark (formItem)="formComplete($event)"></app-add-bookmark>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="addBookmark()" [disabled]="!formDataValid">Save</button>
+    </div>
 </ng-template>
