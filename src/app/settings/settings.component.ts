@@ -10,11 +10,38 @@ export class SettingsComponent implements OnInit {
     formData: any;
     formDataValid: boolean = false;
     clearForm: boolean = false;
+    bookmarks: any;
+    bookmarkLast: any;
+    bookmarkPrevious: any;
+    users: any;
+    activeUser: any;
 
     constructor(private db: DbService) {
     }
 
     ngOnInit() {
+        this.getBookmarks();
+        this.getUsers();
+    }
+
+    getBookmarks() {
+        this.db.getItems('/bookmarks').subscribe(res => {
+            this.bookmarks = res;
+            this.bookmarkLast = this.bookmarks[this.bookmarks.length - 1];
+            this.bookmarkPrevious = this.bookmarks[this.bookmarks.length - 2];
+        });
+    }
+
+    getUsers() {
+        this.db.getItems('/users').subscribe(res => {
+            this.users = res;
+            this.activeUser = this.users.filter(item => {
+                if (item.data.active === 1) {
+                    return item;
+                }
+            });
+            console.log(this.activeUser);
+        });
     }
 
     formComplete(data) {

@@ -4,7 +4,11 @@
             <p>Settings part</p>
         </div>
         <div class="col-md-9">
-
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="">Home</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -37,11 +41,11 @@
                     <div class="people__list has-margin-10">
                         <div class="people__item">
                             <div class="people__logo">
-                                <img src="./../../assets/img/user.png" alt="user icon">
+                                <img src="{{activeUser[0].data.img ? activeUser[0].data.img : './../../assets/img/user.png'}}" alt="user icon">
                             </div>
                             <div class="people__text">
-                                <p>User Name</p>
-                                <span class="font-italic">Email</span>
+                                <p>{{activeUser[0].data.name}}</p>
+                                <span class="font-italic">{{activeUser[0].data.email}}</span>
                             </div>
                         </div>
                         <a href="" class="people__edit">Edit</a>
@@ -74,10 +78,10 @@
                     <div class="appearance__bookmark has-margin-10 border-top">
                         <ul>
                             <li>
-                                <span class="font-italic">Bookmark title</span>
+                                <span class="font-italic">{{bookmarkLast?.data.title}}</span>
                             </li>
                             <li>
-                                <span class="font-italic">Bookmark title</span>
+                                <span class="font-italic">{{bookmarkPrevious?.data.title}}</span>
                             </li>
                         </ul>
                         <div class="row">
@@ -90,6 +94,58 @@
                                    [disabled]="!formDataValid">Add</button>
                             </div>
                         </div>
+                    </div>
+                    <div class="appearance__checked section--height-80 border-top has-margin-10 flex-vertical-aline">
+                        <p class="appearance__title">Show bookmarks</p>
+                        <div class="appearance__checked-checkbox">
+                            <input class="checkbox" type="checkbox" id="appearanceCheckbox">
+                            <label for="appearanceCheckbox"></label>
+                        </div>
+                    </div>
+                    <div class="appearance__fonts section--height-80 border-top has-margin-10 flex-vertical-aline">
+                        <p class="appearance__title">Font size</p>
+                        <div class="appearance__select">
+                            <select class="custom-select mr-sm-2">
+                                <option selected>Choose...</option>
+                                <option value="0.8">Small</option>
+                                <option value="1">Medium</option>
+                                <option value="1.2">Large</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="appearance__zoom section--height-80 border-top has-margin-10 flex-vertical-aline">
+                        <p class="appearance__title">Page zoom</p>
+                        <div class="appearance__select">
+                            <select class="custom-select mr-sm-2">
+                                <option selected>Choose...</option>
+                                <option value="100">100%</option>
+                                <option value="140">140%</option>
+                                <option value="180">180%</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <h2 class="text-center">Advanced</h2>
+
+            <section>
+                <p class="settings__title">Printing</p>
+                <div class="printing border flex-vertical-aline section--height-80">
+                    <div class="has-margin-10">
+                        <a href="">Printers</a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <p class="settings__title">Reset</p>
+                <div class="printing border flex-vertical-aline section--height-80">
+                    <div class="has-margin-10">
+                        <div>
+                            <a href="">Reset</a>
+                        </div>
+                        <small>Restore settings to their original defaults</small>
                     </div>
                 </div>
             </section>

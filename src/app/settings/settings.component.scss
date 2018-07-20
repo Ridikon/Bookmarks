@@ -11,10 +11,7 @@
 }
 
 .settings {
-  height: 100%;
-
   &__content {
-    height: calc(100% - 40px);
     border: 1px solid black;
   }
 
@@ -65,4 +62,70 @@
 
 .list-title {
   margin: 1rem 0 0;
+}
+
+.section--height-80 {
+    height: 80px;
+}
+
+.appearance__checked {
+    &-checkbox {
+        position: relative;
+        width: 40px;
+        height: 20px;
+        margin-left: 20px;
+
+        .checkbox {
+            visibility: hidden;
+
+            &:checked {
+                &~label {
+                    &:after {
+                        position: absolute;
+                        content: '';
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        background-color: #fff;
+                        transform: translateX(20px);
+                    }
+                }
+            }
+
+            &:not(:checked) {
+                &~label {
+                    &:after {
+                        position: absolute;
+                        content: '';
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        background-color: #fff;
+                        transform: translateX(0px);
+                    }
+                }
+            }
+        }
+
+        label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: green;
+            width: 100%;
+            height: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+    }
+}
+
+.appearance__title {
+    margin: 0;
+}
+
+.appearance__select {
+    margin-left: 20px;
 }

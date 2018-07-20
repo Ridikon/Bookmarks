@@ -16,7 +16,6 @@ export class AddBookmarkComponent implements OnInit, DoCheck {
     }
 
     ngOnInit() {
-        console.log(this.isClean);
         this.form = new FormGroup({
             title: new FormControl(this.bookmarkFormItem ? this.bookmarkFormItem.data.title : '', Validators.required),
             url: new FormControl(this.bookmarkFormItem ? this.bookmarkFormItem.data.url : '', [Validators.required, this.checkUrl])
