@@ -12,8 +12,8 @@ export class DbService {
 
     getItems(path: string) {
         const bookmarkList = this.db.list(path).snapshotChanges()
-            .pipe(map(items => {
-                return items.map(a => {
+            .pipe(map(item => {
+                return item.map(a => {
                     const data = a.payload.val();
                     const key = a.payload.key;
                     return {key, data};
