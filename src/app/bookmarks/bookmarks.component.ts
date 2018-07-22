@@ -1,9 +1,8 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DbService} from '../services/db.service';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import {PageChangedEvent} from 'ngx-bootstrap/pagination';
 
 
 @Component({
@@ -13,7 +12,6 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 })
 export class BookmarksComponent implements OnInit {
     modalRef: BsModalRef;
-    form: FormGroup;
     bookmarksCopy: any;
     bookmarks = [];
     returnedArray: any[];
@@ -53,7 +51,6 @@ export class BookmarksComponent implements OnInit {
         };
         this.db.createItem('/bookmarks', bookmark);
         this.modalRef.hide();
-        this.form.reset();
     }
 
     searchResult(search) {

@@ -1,8 +1,9 @@
-<li class="list-group-item d-flex justify-content-between align-items-center">
-    {{bookmarkItem.data.title}}
+<li class="list-group-item d-flex justify-content-between align-items-center"
+    >
+    {{userItem.data.name}}
     <div class="btn-group">
-        <button type="button" class="btn btn-primary" (click)="bookmarkModal(edit)">Edit</button>
-        <button type="button" class="btn btn-warning" (click)="bookmarkModal(delete)">Delete</button>
+        <button type="button" class="btn btn-primary" (click)="userModal(edit)">Edit</button>
+        <button type="button" class="btn btn-warning" (click)="userModal(delete)">Delete</button>
     </div>
 </li>
 
@@ -15,11 +16,11 @@
         </button>
     </div>
     <div class="modal-body">
-        <app-add-bookmark [bookmarkFormItem]="bookmarkItem" (formItem)="formComplete($event)"></app-add-bookmark>
+        <app-user-form [userFormItem]="userItem" (formItem)="formComplete($event)"></app-user-form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!formDataValid" (click)="editBookmark(bookmarkItem)">
+        <button type="submit" class="btn btn-primary" [disabled]="!formDataValid" (click)="editUser(userItem)">
             Save
         </button>
     </div>
@@ -33,12 +34,10 @@
         </button>
     </div>
     <div class="modal-body">
-        <h3>Confirm to delete this bookmark?</h3>
+        <h3>Confirm to delete this user?</h3>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
-        <button type="submit" class="btn btn-primary" (click)="deleteBookmark(bookmarkItem)">Confirm</button>
+        <button type="submit" class="btn btn-primary" (click)="deleteUser(userItem)">Confirm</button>
     </div>
 </ng-template>
-
-

@@ -7,14 +7,14 @@
                     <a class="nav-link" routerLink="/settings">Settings</a>
                 </li>
             </ul>
+            <br>
+            <p>Bookmark List</p>
             <ul class="list-group">
-                <br>
-                <p>Bookmark List</p>
-                <app-bookmark *ngFor="let bookmark of returnedArray; let i = index"
+                <app-bookmark *ngFor="let bookmark of returnedArray"
                               [bookmarkItem]="bookmark"></app-bookmark>
             </ul>
             <br>
-            <a href="#" (click)="addBookmarkModal(template)">Create Bookmark</a>
+            <button class="btn btn-primary" (click)="addBookmarkModal(template)">Create Bookmark</button>
         </div>
     </div>
     <hr>

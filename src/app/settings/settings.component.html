@@ -6,7 +6,7 @@
         <div class="col-md-9">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="">Home</a>
+                    <a class="nav-link" routerLink="/">Home</a>
                 </li>
             </ul>
         </div>
@@ -41,16 +41,18 @@
                     <div class="people__list has-margin-10">
                         <div class="people__item">
                             <div class="people__logo">
-                                <img src="{{activeUser[0].data.img ? activeUser[0].data.img : './../../assets/img/user.png'}}" alt="user icon">
+                                <img
+                                    src="{{activeUser?.data.img ? activeUser?.data.img : './../../assets/img/user.png'}}"
+                                    alt="user icon">
                             </div>
                             <div class="people__text">
-                                <p>{{activeUser[0].data.name}}</p>
-                                <span class="font-italic">{{activeUser[0].data.email}}</span>
+                                <p>{{activeUser?.data.name}}</p>
+                                <span class="font-italic">{{activeUser?.data.email}}</span>
                             </div>
                         </div>
                         <a href="" class="people__edit">Edit</a>
                     </div>
-                    <a href="" class="people__manage border-top">Manage other people</a>
+                    <a routerLink="/users" class="people__manage border-top">Manage other people</a>
                 </div>
             </section>
 
@@ -86,12 +88,14 @@
                         </ul>
                         <div class="row">
                             <div class="col">
-                                <app-add-bookmark [isClean]="clearForm" (formItem)="formComplete($event)"></app-add-bookmark>
+                                <app-add-bookmark [isClean]="clearForm"
+                                                  (formItem)="formComplete($event)"></app-add-bookmark>
                             </div>
                             <div class="col flex-vertical-aline">
                                 <button class="align-middle"
-                                   (click)="addBookmark()"
-                                   [disabled]="!formDataValid">Add</button>
+                                        (click)="addBookmark()"
+                                        [disabled]="!formDataValid">Add
+                                </button>
                             </div>
                         </div>
                     </div>

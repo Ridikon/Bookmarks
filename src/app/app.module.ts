@@ -1,8 +1,10 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireStorageModule} from 'angularfire2/storage';
 
+import {environment} from '../environments/environment';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {ModalModule} from 'ngx-bootstrap';
@@ -10,10 +12,12 @@ import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {BookmarkComponent} from './bookmark/bookmark.component';
 import {BookmarksComponent} from './bookmarks/bookmarks.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {environment} from '../environments/environment';
 import {SettingsComponent} from './settings/settings.component';
-import {AppRoutingModule} from "./app-routing.module";
-import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AddBookmarkComponent} from './add-bookmark/add-bookmark.component';
+import {UsersComponent} from './users/users.component';
+import {UserComponent} from './user/user.component';
+import {UserFormComponent} from './user-form/user-form.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +26,10 @@ import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
         BookmarkComponent,
         BookmarksComponent,
         SettingsComponent,
-        AddBookmarkComponent
+        AddBookmarkComponent,
+        UsersComponent,
+        UserComponent,
+        UserFormComponent
     ],
     imports: [
         BrowserModule,
@@ -31,7 +38,8 @@ import { AddBookmarkComponent } from './add-bookmark/add-bookmark.component';
         ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
-        AppRoutingModule
+        AppRoutingModule,
+        AngularFireStorageModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -1,7 +1,8 @@
-import {NgModule} from "@angular/core";
-import {Routes, RouterModule} from "@angular/router";
-import {BookmarksComponent} from "./bookmarks/bookmarks.component";
-import {SettingsComponent} from "./settings/settings.component";
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {BookmarksComponent} from './bookmarks/bookmarks.component';
+import {SettingsComponent} from './settings/settings.component';
+import {UsersComponent} from './users/users.component';
 
 const appRouts: Routes = [
     {
@@ -11,6 +12,10 @@ const appRouts: Routes = [
     {
         path: 'settings',
         component: SettingsComponent
+    },
+    {
+        path: 'users',
+        component: UsersComponent
     }
 ];
 

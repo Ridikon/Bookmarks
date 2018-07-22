@@ -35,9 +35,9 @@ export class SettingsComponent implements OnInit {
     getUsers() {
         this.db.getItems('/users').subscribe(res => {
             this.users = res;
-            this.activeUser = this.users.filter(item => {
+            this.users.filter(item => {
                 if (item.data.active === 1) {
-                    return item;
+                    this.activeUser = item;
                 }
             });
             console.log(this.activeUser);

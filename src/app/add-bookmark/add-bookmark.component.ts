@@ -7,7 +7,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
     styleUrls: ['./add-bookmark.component.scss']
 })
 export class AddBookmarkComponent implements OnInit, DoCheck {
-    form: FormGroup;
+    bookmark_form: FormGroup;
     @Output() formItem = new EventEmitter<any>();
     @Input() bookmarkFormItem;
     @Input() isClean;
@@ -16,7 +16,7 @@ export class AddBookmarkComponent implements OnInit, DoCheck {
     }
 
     ngOnInit() {
-        this.form = new FormGroup({
+        this.bookmark_form = new FormGroup({
             title: new FormControl(this.bookmarkFormItem ? this.bookmarkFormItem.data.title : '', Validators.required),
             url: new FormControl(this.bookmarkFormItem ? this.bookmarkFormItem.data.url : '', [Validators.required, this.checkUrl])
         });
@@ -37,12 +37,12 @@ export class AddBookmarkComponent implements OnInit, DoCheck {
     }
 
     formRun() {
-        this.formItem.emit(this.form);
+        this.formItem.emit(this.bookmark_form);
     }
 
     clearForm(bool) {
         if (bool) {
-            this.form.reset();
+            this.bookmark_form.reset();
         }
     }
 
