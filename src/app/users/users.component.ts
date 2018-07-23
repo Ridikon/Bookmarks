@@ -45,12 +45,32 @@ export class UsersComponent implements OnInit {
             email: this.formData.value.email,
         };
         this.db.createItem('/users', user);
-        console.log(user);
         this.modalRef.hide();
     }
 
     formComplete(data) {
         this.formData = data;
         this.formDataValid = data.valid;
+    }
+
+    setActiveUser(data) {
+        this.users.filter(item => {
+            if (item.data.active === 1) {
+                const user = {
+                    active: 0,
+                    img: item.data.img,
+                    name: item.data.name,
+                    email: item.data.email,
+                };
+                this.db.updateItem('/users', item.key, user);
+            }
+        });
+        const user = {
+            active: 1,
+            img: data.data.img,
+            name: data.data.name,
+            email: data.data.email,
+        };
+        this.db.updateItem('/users', data.key, user);
     }
  }

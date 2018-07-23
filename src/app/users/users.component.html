@@ -4,7 +4,7 @@
             <br>
             <a routerLink="/settings">Back</a>
             <ul class="list-group">
-                <app-user *ngFor="let user of users" [userItem]="user"></app-user>
+                <app-user *ngFor="let user of users" (thisUser)="setActiveUser($event)" [userItem]="user"></app-user>
             </ul>
             <br>
             <button class="btn btn-primary" (click)="addUserModal(template)">Add new user</button>

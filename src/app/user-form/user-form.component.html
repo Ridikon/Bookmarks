@@ -1,7 +1,7 @@
 <form [formGroup]="user_form">
     <div class="form-group">
         <div>
-            <img [src]="user_form.get('img')" alt="">
+            <img [src]="user_form.value.img" [alt]="user_form.value.name">
         </div>
         <label for="userPhoto">User photo</label>
         <input type="file"

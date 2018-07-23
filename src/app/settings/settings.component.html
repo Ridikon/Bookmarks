@@ -18,24 +18,24 @@
         <aside class="col-md-3 settings__sidebar">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">People</a>
+                    <a class="nav-link active" href="/settings#people">People</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Appearance</a>
+                    <a class="nav-link" href="/settings#appearance">Appearance</a>
                 </li>
                 <li class="nav-item">
                     <p class="list-title text-center font-weight-bold">Advanced</p>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Printing</a>
+                    <a class="nav-link" href="/settings#printing">Printing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Reset</a>
+                    <a class="nav-link" href="/settings#reset">Reset</a>
                 </li>
             </ul>
         </aside>
         <main class="col-md-9 settings__main">
-            <section>
+            <section id="people">
                 <p class="settings__title">People</p>
                 <div class="people border">
                     <div class="people__list has-margin-10">
@@ -50,32 +50,32 @@
                                 <span class="font-italic">{{activeUser?.data.email}}</span>
                             </div>
                         </div>
-                        <a href="" class="people__edit">Edit</a>
+                        <button class="btn btn-primary people__edit" (click)="userModal(edit)">Edit</button>
                     </div>
                     <a routerLink="/users" class="people__manage border-top">Manage other people</a>
                 </div>
             </section>
 
-            <section>
+            <section id="appearance">
                 <p class="settings__title">Appearance</p>
                 <div class="appearance border">
                     <div class="appearance__theme has-margin-10">
                         <p>Themes</p>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                   value="option1">
-                            <label class="form-check-label" for="inlineRadio1">White</label>
+                        <div *ngFor="let color of themeColors" class="form-check form-check-inline">
+                            <input class="form-check-input" (change)="setActiveTheme(color)" [checked]="color.active" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                   [value]="color.color">
+                            <label class="form-check-label" for="inlineRadio1">{{color.color}}</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                   value="option2">
-                            <label class="form-check-label" for="inlineRadio2">Black</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                   value="option3">
-                            <label class="form-check-label" for="inlineRadio3">Red</label>
-                        </div>
+                        <!--<div class="form-check form-check-inline">-->
+                            <!--<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"-->
+                                   <!--value="black">-->
+                            <!--<label class="form-check-label" for="inlineRadio2">Black</label>-->
+                        <!--</div>-->
+                        <!--<div class="form-check form-check-inline">-->
+                            <!--<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"-->
+                                   <!--value="red">-->
+                            <!--<label class="form-check-label" for="inlineRadio3">Red</label>-->
+                        <!--</div>-->
                     </div>
                     <div class="appearance__bookmark has-margin-10 border-top">
                         <ul>
@@ -133,7 +133,7 @@
 
             <h2 class="text-center">Advanced</h2>
 
-            <section>
+            <section id="printing">
                 <p class="settings__title">Printing</p>
                 <div class="printing border flex-vertical-aline section--height-80">
                     <div class="has-margin-10">
@@ -142,7 +142,7 @@
                 </div>
             </section>
 
-            <section>
+            <section id="reset">
                 <p class="settings__title">Reset</p>
                 <div class="printing border flex-vertical-aline section--height-80">
                     <div class="has-margin-10">
@@ -156,4 +156,22 @@
         </main>
     </div>
 </div>
+
+<ng-template #edit>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Edit</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-user-form [userFormItem]="activeUser" (formItem)="userFormComplete($event)"></app-user-form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!formDataValid" (click)="editUser()">
+            Save
+        </button>
+    </div>
+</ng-template>
 

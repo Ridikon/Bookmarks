@@ -9,6 +9,7 @@ import {FileStorageService} from '../services/file-storage.service';
 })
 export class UserFormComponent implements OnInit {
     user_form: FormGroup;
+    downloadUrl: string;
     @Input() userFormItem;
     @Output() formItem = new EventEmitter<any>();
 
@@ -17,7 +18,7 @@ export class UserFormComponent implements OnInit {
 
     ngOnInit() {
         this.user_form = new FormGroup({
-            img: new FormControl(this.userFormItem ? this.userFormItem.data.img : '', Validators.required),
+            img: new FormControl(this.userFormItem ? this.userFormItem.data.img : '../assets/img/user.png'),
             name: new FormControl(this.userFormItem ? this.userFormItem.data.name : '', Validators.required),
             email: new FormControl(this.userFormItem ? this.userFormItem.data.email : '', [Validators.required, this.checkUrl])
         });
@@ -33,12 +34,28 @@ export class UserFormComponent implements OnInit {
         };
     }
 
+    uploadImg() {
+        this.storage.uploadFile('image', event).then(res => {
+            res.ref.getDownloadURL().then(url => {
+                this.downloadUrl = url;
+            }).then(() => {
+                this.user_form.patchValue({
+                    img: this.downloadUrl
+                });
+            }).catch(err => {
+                console.log(err.message);
+            });
+        }).catch(err => {
+            console.log(err.message);
+        });
+    }
+
     formRun(event) {
         if (event) {
-            this.storage.uploadFile('image', event).subscribe(res => {
-                console.log('res', res);
-            });
+            this.uploadImg();
+            this.formItem.emit(this.user_form);
+        } else {
+            this.formItem.emit(this.user_form);
         }
-        this.formItem.emit(this.user_form);
     }
 }

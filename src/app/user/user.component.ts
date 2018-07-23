@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {DbService} from '../services/db.service';
@@ -13,6 +13,7 @@ export class UserComponent implements OnInit {
     formData: any;
     formDataValid: boolean;
     @Input() userItem;
+    @Output() thisUser = new EventEmitter<any>();
 
     constructor(private modalService: BsModalService, private db: DbService) {
     }
@@ -25,8 +26,18 @@ export class UserComponent implements OnInit {
     }
 
     editUser(item) {
-        this.db.updateItem('users', item.key, this.formData.value);
+        const user = {
+            active: 0,
+            img: this.formData.value.img,
+            name: this.formData.value.name,
+            email: this.formData.value.email,
+        };
+        this.db.updateItem('users', item.key, user);
         this.modalRef.hide();
+    }
+
+    setUserActive(item) {
+        this.thisUser.emit(item);
     }
 
     deleteUser(item) {
@@ -38,5 +49,4 @@ export class UserComponent implements OnInit {
         this.formData = data;
         this.formDataValid = data.valid;
     }
-
 }
