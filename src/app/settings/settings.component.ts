@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {DbService} from '../services/db.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-settings',
@@ -19,26 +20,25 @@ export class SettingsComponent implements OnInit {
     bookmarkPrevious: any;
     users: any;
     activeUser: any;
-    themeColors: Array<{}>;
+    appearance: {};
 
-    constructor(private modalService: BsModalService, private db: DbService) {
-        this.themeColors = [
-            {
-                id: 1,
-                color: 'white',
-                active: true
-            },
-            {
-                id: 2,
-                color: 'black',
-                active: false
-            },
-            {
-                id: 3,
-                color: 'red',
-                active: false
-            }
-        ];
+    constructor(private modalService: BsModalService, private db: DbService, private router: Router) {
+        if (localStorage.pageOptions) {
+            const options = JSON.parse(localStorage.getItem('pageOptions'));
+            this.appearance = {
+                themeColor: options.themeColor,
+                fontSize: options.fontSize,
+                pageZoom: options.pageZoom,
+                showBookmarks: options.showBookmarks
+            };
+        } else {
+            this.appearance = {
+                themeColor: 'white',
+                fontSize: 1,
+                pageZoom: 1,
+                showBookmarks: true
+            };
+        }
     }
 
     ngOnInit() {
@@ -46,8 +46,23 @@ export class SettingsComponent implements OnInit {
         this.getUsers();
     }
 
-    setActiveTheme(color) {
-        color.active = true;
+    setActiveTheme() {
+        localStorage.setItem('pageOptions', JSON.stringify(this.appearance));
+    }
+
+    openPrint() {
+        localStorage.setItem('printingPage', JSON.stringify(true));
+        this.router.navigateByUrl('/');
+    }
+
+    resetOptions() {
+        this.appearance = {
+            themeColor: 'white',
+            fontSize: 1,
+            pageZoom: 1,
+            showBookmarks: true
+        };
+        localStorage.setItem('pageOptions', JSON.stringify(this.appearance));
     }
 
     userModal(template: TemplateRef<any>) {

@@ -11,7 +11,7 @@ import {ModalModule} from 'ngx-bootstrap';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {BookmarkComponent} from './bookmark/bookmark.component';
 import {BookmarksComponent} from './bookmarks/bookmarks.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SettingsComponent} from './settings/settings.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AddBookmarkComponent} from './add-bookmark/add-bookmark.component';
@@ -39,7 +39,8 @@ import {UserFormComponent} from './user-form/user-form.component';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
         AppRoutingModule,
-        AngularFireStorageModule
+        AngularFireStorageModule,
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

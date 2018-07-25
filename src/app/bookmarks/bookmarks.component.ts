@@ -1,8 +1,9 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {AfterViewChecked, Component, OnInit, TemplateRef} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {DbService} from '../services/db.service';
 import {PageChangedEvent} from 'ngx-bootstrap/pagination';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -10,19 +11,48 @@ import {PageChangedEvent} from 'ngx-bootstrap/pagination';
     templateUrl: './bookmarks.component.html',
     styleUrls: ['./bookmarks.component.css']
 })
-export class BookmarksComponent implements OnInit {
+export class BookmarksComponent implements OnInit, AfterViewChecked {
     modalRef: BsModalRef;
     bookmarksCopy: any;
     bookmarks = [];
     returnedArray: any[];
     formData: any;
     formDataValid: boolean = false;
+    pageOptions: {};
 
-    constructor(private modalService: BsModalService, private db: DbService) {
+    constructor(private modalService: BsModalService, private db: DbService, private router: Router) {
+        if (localStorage.pageOptions) {
+            const options = JSON.parse(localStorage.getItem('pageOptions'));
+            this.pageOptions = {
+                themeColor: options.themeColor,
+                fontSize: options.fontSize,
+                pageZoom: options.pageZoom,
+                showBookmarks: options.showBookmarks
+            };
+        } else {
+            this.pageOptions = {
+                themeColor: 'white',
+                fontSize: 1,
+                pageZoom: 1,
+                showBookmarks: true
+            };
+        }
     }
 
     ngOnInit() {
         this.getBookmarks();
+    }
+
+    ngAfterViewChecked() {
+        if (localStorage.printingPage && JSON.parse(localStorage.printingPage)) {
+            setTimeout(() => {
+                window.print();
+            }, 100);
+            window.onafterprint = () => {
+                this.router.navigateByUrl('/settings');
+            };
+            localStorage.setItem('printingPage', JSON.stringify(false));
+        }
     }
 
     getBookmarks() {

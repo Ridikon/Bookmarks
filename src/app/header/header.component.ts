@@ -9,8 +9,15 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class HeaderComponent implements OnInit {
   @Output() search = new EventEmitter<string>();
   form: FormGroup;
+  headerTheme: string;
 
   constructor() {
+      if (localStorage.pageOptions) {
+          const theme = JSON.parse(localStorage.getItem('pageOptions'));
+          this.headerTheme = theme.themeColor;
+      } else {
+          this.headerTheme = 'white';
+      }
   }
 
   ngOnInit() {

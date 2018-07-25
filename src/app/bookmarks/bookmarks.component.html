@@ -1,5 +1,5 @@
 <app-header (search)="searchResult($event)"></app-header>
-<div class="container">
+<div class="container" [ngStyle]="{'font-size': pageOptions.fontSize, 'zoom': pageOptions.pageZoom}">
     <div class="row">
         <div class="col-md-12">
             <ul class="nav">
@@ -9,10 +9,13 @@
             </ul>
             <br>
             <p>Bookmark List</p>
-            <ul class="list-group">
+            <ul class="list-group" *ngIf="pageOptions.showBookmarks">
                 <app-bookmark *ngFor="let bookmark of returnedArray"
                               [bookmarkItem]="bookmark"></app-bookmark>
             </ul>
+            <p *ngIf="!pageOptions.showBookmarks" class="text-center">
+                Nothing found!
+            </p>
             <br>
             <button class="btn btn-primary" (click)="addBookmarkModal(template)">Create Bookmark</button>
         </div>
@@ -20,7 +23,7 @@
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <pagination [totalItems]="bookmarks.length"
+            <pagination [totalItems]="pageOptions.showBookmarks ? bookmarks.length : 1"
                         [boundaryLinks]="true"
                         firstText="&laquo;" lastText="&raquo;"
                         (pageChanged)="pageChanged($event)"></pagination>

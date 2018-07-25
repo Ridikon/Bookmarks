@@ -61,21 +61,36 @@
                 <div class="appearance border">
                     <div class="appearance__theme has-margin-10">
                         <p>Themes</p>
-                        <div *ngFor="let color of themeColors" class="form-check form-check-inline">
-                            <input class="form-check-input" (change)="setActiveTheme(color)" [checked]="color.active" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                   [value]="color.color">
-                            <label class="form-check-label" for="inlineRadio1">{{color.color}}</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input"
+                                   [(ngModel)]="appearance.themeColor"
+                                   (change)="setActiveTheme()"
+                                   value="white"
+                                   type="radio"
+                                   name="inlineRadioOptions"
+                                   id="inlineRadio1">
+                            <label class="form-check-label" for="inlineRadio1">White</label>
                         </div>
-                        <!--<div class="form-check form-check-inline">-->
-                            <!--<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"-->
-                                   <!--value="black">-->
-                            <!--<label class="form-check-label" for="inlineRadio2">Black</label>-->
-                        <!--</div>-->
-                        <!--<div class="form-check form-check-inline">-->
-                            <!--<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"-->
-                                   <!--value="red">-->
-                            <!--<label class="form-check-label" for="inlineRadio3">Red</label>-->
-                        <!--</div>-->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input"
+                                   [(ngModel)]="appearance.themeColor"
+                                   (change)="setActiveTheme()"
+                                   value="black"
+                                   type="radio"
+                                   name="inlineRadioOptions"
+                                   id="inlineRadio2">
+                            <label class="form-check-label" for="inlineRadio2">Black</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input"
+                                   [(ngModel)]="appearance.themeColor"
+                                   (change)="setActiveTheme()"
+                                   value="red"
+                                   type="radio"
+                                   name="inlineRadioOptions"
+                                   id="inlineRadio3">
+                            <label class="form-check-label" for="inlineRadio3">Red</label>
+                        </div>
                     </div>
                     <div class="appearance__bookmark has-margin-10 border-top">
                         <ul>
@@ -102,15 +117,18 @@
                     <div class="appearance__checked section--height-80 border-top has-margin-10 flex-vertical-aline">
                         <p class="appearance__title">Show bookmarks</p>
                         <div class="appearance__checked-checkbox">
-                            <input class="checkbox" type="checkbox" id="appearanceCheckbox">
+                            <input class="checkbox"
+                                   (change)="setActiveTheme()"
+                                   [(ngModel)]="appearance.showBookmarks"
+                                   type="checkbox"
+                                   id="appearanceCheckbox">
                             <label for="appearanceCheckbox"></label>
                         </div>
                     </div>
                     <div class="appearance__fonts section--height-80 border-top has-margin-10 flex-vertical-aline">
                         <p class="appearance__title">Font size</p>
                         <div class="appearance__select">
-                            <select class="custom-select mr-sm-2">
-                                <option selected>Choose...</option>
+                            <select [(ngModel)]="appearance.fontSize" (change)="setActiveTheme()" class="custom-select mr-sm-2">
                                 <option value="0.8">Small</option>
                                 <option value="1">Medium</option>
                                 <option value="1.2">Large</option>
@@ -120,11 +138,10 @@
                     <div class="appearance__zoom section--height-80 border-top has-margin-10 flex-vertical-aline">
                         <p class="appearance__title">Page zoom</p>
                         <div class="appearance__select">
-                            <select class="custom-select mr-sm-2">
-                                <option selected>Choose...</option>
-                                <option value="100">100%</option>
-                                <option value="140">140%</option>
-                                <option value="180">180%</option>
+                            <select [(ngModel)]="appearance.pageZoom" (change)="setActiveTheme()" class="custom-select mr-sm-2">
+                                <option value="1">100%</option>
+                                <option value="1.4">140%</option>
+                                <option value="1.8">180%</option>
                             </select>
                         </div>
                     </div>
@@ -137,7 +154,7 @@
                 <p class="settings__title">Printing</p>
                 <div class="printing border flex-vertical-aline section--height-80">
                     <div class="has-margin-10">
-                        <a href="">Printers</a>
+                        <button (click)="openPrint()">Printers</button>
                     </div>
                 </div>
             </section>
@@ -147,7 +164,7 @@
                 <div class="printing border flex-vertical-aline section--height-80">
                     <div class="has-margin-10">
                         <div>
-                            <a href="">Reset</a>
+                            <a href="/settings" (click)="resetOptions()">Reset</a>
                         </div>
                         <small>Restore settings to their original defaults</small>
                     </div>
