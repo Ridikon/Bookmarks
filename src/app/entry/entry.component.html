@@ -1,0 +1,20 @@
+<p>
+  entry works!
+</p>
+
+<div class="container">
+    <ul>
+        <li *ngFor="let hero of heroes; trackBy: trackByFn" [@whoop]>{{hero.name}}</li>
+    </ul>
+</div>
+
+<div class="container">
+    <ul>
+        <li *ngFor="let hero of heroes" [@whoop]>{{hero.name}}</li>
+    </ul>
+</div>
+
+<div class="container">
+    <button (click)="addHero()">Add</button>
+</div>
+
