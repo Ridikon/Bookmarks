@@ -10,7 +10,7 @@
             <br>
             <p>Bookmark List</p>
             <ul class="list-group" *ngIf="pageOptions.showBookmarks">
-                <app-bookmark *ngFor="let bookmark of returnedArray"
+                <app-bookmark *ngFor="let bookmark of returnedArray; trackBy: trackByFn"
                               [bookmarkItem]="bookmark"></app-bookmark>
             </ul>
             <p *ngIf="!pageOptions.showBookmarks" class="text-center">

@@ -5,7 +5,7 @@
                 <div class="navbar navbar-light">
                     <a class="navbar-brand"><i class="fab fa-delicious fa-2x"></i></a>
                     <form [formGroup]="form" class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                        <input #input id="input-search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
                                formControlName="search" (keyup)="searchRun()">
                     </form>
                 </div>

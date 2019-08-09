@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Renderer2} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -6,12 +6,13 @@ import {FormControl, FormGroup} from '@angular/forms';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   @Output() search = new EventEmitter<string>();
+  @ViewChild('input') inputRef: ElementRef;
   form: FormGroup;
   headerTheme: string;
 
-  constructor() {
+  constructor(private renderer: Renderer2) {
       if (localStorage.pageOptions) {
           const theme = JSON.parse(localStorage.getItem('pageOptions'));
           this.headerTheme = theme.themeColor;
@@ -20,7 +21,13 @@ export class HeaderComponent implements OnInit {
       }
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+      // this.inputRef.nativeElement.focus()
+      this.renderer.selectRootElement('#input-search').focus()
+      // this.renderer.removeAttribute(this.inputRef.nativeElement, 'placeholder');
+  }
+
+    ngOnInit() {
     this.form = new FormGroup({
       search: new FormControl('')
     });

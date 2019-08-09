@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {BookmarksComponent} from './bookmarks/bookmarks.component';
 import {SettingsComponent} from './settings/settings.component';
 import {UsersComponent} from './users/users.component';
+import {EntryComponent} from './entry/entry.component';
 
 const appRouts: Routes = [
     {
@@ -16,6 +17,10 @@ const appRouts: Routes = [
     {
         path: 'users',
         component: UsersComponent
+    },
+    {
+        path: 'entry',
+        component: EntryComponent
     }
 ];
 

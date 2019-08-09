@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireStorageModule} from 'angularfire2/storage';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {environment} from '../environments/environment';
 import {AppComponent} from './app.component';
@@ -18,6 +19,8 @@ import {AddBookmarkComponent} from './add-bookmark/add-bookmark.component';
 import {UsersComponent} from './users/users.component';
 import {UserComponent} from './user/user.component';
 import {UserFormComponent} from './user-form/user-form.component';
+import { EntryComponent } from './entry/entry.component';
+import { SrakaComponent } from './sraka/sraka.component';
 
 @NgModule({
     declarations: [
@@ -29,10 +32,13 @@ import {UserFormComponent} from './user-form/user-form.component';
         AddBookmarkComponent,
         UsersComponent,
         UserComponent,
-        UserFormComponent
+        UserFormComponent,
+        EntryComponent,
+        SrakaComponent
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         ModalModule.forRoot(),
         PaginationModule.forRoot(),
         ReactiveFormsModule,
@@ -42,6 +48,7 @@ import {UserFormComponent} from './user-form/user-form.component';
         AngularFireStorageModule,
         FormsModule
     ],
+    entryComponents: [SrakaComponent],
     providers: [],
     bootstrap: [AppComponent]
 })
